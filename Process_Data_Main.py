@@ -24,33 +24,33 @@ import csv
 students = []   
 
 
-#try:
+try:
         # reading csv file
-with open('Students.csv', 'r') as file:
-                # creating a csv reader object
-                reader = csv.reader(file)
+        with open('Students.csv', 'r') as file:
+                        # creating a csv reader object
+                        reader = csv.reader(file)
 
-                # Read the header (first row)
-                header = next(reader) 
-                
-                # extracting field names through first row
-                for row in reader:
+                        # Read the header (first row)
+                        header = next(reader) 
                         
-                        #data elements extracted from the row 
-                        name, math, science, english = row
+                        # extracting field names through first row
+                        for row in reader:
+                                
+                                #data elements extracted from the row 
+                                name, math, science, english = row
+                                
+                                #calculate the average score
+                                average = Calculation_Functions.calculate_average([int(math), int(science), int(english)])
+                                
+                                #assign the grade
+                                grade = Calculation_Functions.assign_grade(average)
                         
-                        #calculate the average score
-                        average = Calculation_Functions.calculate_average([int(math), int(science), int(english)])
-                        
-                        #assign the grade
-                        grade = Calculation_Functions.assign_grade(average)
-                
-                        #append the data into the list
-                        students.append([name, math, science, english, average, grade])
+                                #append the data into the list
+                                students.append([name, math, science, english, average, grade])
 
-#except FileNotFoundError:
+except FileNotFoundError:
  #       # Handle case when the file is not found
-  #      print(f"Error: Students.csv not found.")
+        print(f"Error: Students.csv not found.")
 
 #write the data into a new file
 with open('Student_Results.csv', 'w', newline='') as file:
